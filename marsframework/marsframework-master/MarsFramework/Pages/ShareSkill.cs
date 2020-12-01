@@ -186,21 +186,22 @@ namespace MarsFramework.Pages
 
 
             // Upload document from the path saved in excel, if it's input type, then can send path directly
-            //try
-            //{
-            //    IWebElement upload = GlobalDefinitions.driver.FindElement(By.XPath("//input[@id='selectFile']"));
-            //    // Uploading File path
-            //    var SampleWorkPath = MarsResource.SampleWorkPath;
-            //    string fullPath = System.IO.Path.GetFullPath(SampleWorkPath);
-            //    upload.SendKeys(fullPath);
-            //} catch (Exception e)
-            //{
-            //    Assert.Fail("Failed to upload work sample", e.Message);
-            //}
+            try
+            {
+                IWebElement upload = GlobalDefinitions.driver.FindElement(By.XPath("//input[@id='selectFile']"));
+                // Uploading File path
+                var SampleWorkPath = MarsResource.SampleWorkPath;
+                string fullPath = System.IO.Path.GetFullPath(SampleWorkPath);
+                upload.SendKeys(fullPath);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("Failed to upload work sample", e.Message);
+            }
 
 
             // Choose Active radio button
-            //GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, "XPath", "//i[@class='remove sign icon floatRight']", 10);
+            GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, "XPath", "//i[@class='remove sign icon floatRight']", 10);
             IWebElement IsActiveRadioBtn = GlobalDefinitions.driver.FindElement(By.XPath("//input[@name='isActive' and" +
                 " @value='" + GlobalDefinitions.ExcelLib.ReadData(2, "Active") + "']"));
             IsActiveRadioBtn.Click();
