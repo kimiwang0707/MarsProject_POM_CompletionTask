@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using RelevantCodes.ExtentReports;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Threading;
@@ -17,6 +18,12 @@ namespace MarsFramework
         }
 
         #region  Initialize Web Elements 
+        #region 
+        // Profile Name used to be the benchmark to verify all contents turn up
+        [FindsBy(How = How.ClassName, Using = "title")]
+        private IWebElement profileName { get; set; }
+
+        #endregion
         #region Availability Type
         //Click on Availability Edit button
         [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Time')]/i")]
@@ -233,6 +240,8 @@ namespace MarsFramework
 
                 // Choose Availability parttime; fulltime
                 new SelectElement(AvailabilityTime).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "Availability Type"));
+                //Base.test.Log(LogStatus.Info, "Enter availability type successfully");
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter availability type successfully");
             } catch(Exception ex)
             {
                 Assert.Fail("Test failed to enter Availability Type", ex.Message);
@@ -251,6 +260,7 @@ namespace MarsFramework
 
                 // Select Hours 0-less than 30h; 1-more than 30h 2-as needed
                 new SelectElement(AvailabilityHours).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "Availability Hours"));
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter availability successfully");
             } catch(Exception ex)
             {
                 Assert.Fail("Test failed to enter Availability Hours", ex.Message);
@@ -269,6 +279,7 @@ namespace MarsFramework
 
                 // Click earn 0-less than 500; 1-500~1000; 2-more than 1000
                 new SelectElement(Salary).SelectByText(GlobalDefinitions.ExcelLib.ReadData(2, "Earn Target"));
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter earn target successfully");
             } catch(Exception ex)
             {
                 Assert.Fail("Test failed to enter Earn Target", ex.Message);
@@ -288,6 +299,7 @@ namespace MarsFramework
 
                 // Click Save
                 DescriptionSave.Click();
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter description successfully");
             } catch (Exception ex)
             {
                 Assert.Fail("Test failed to Enter Description",ex.Message);
@@ -316,6 +328,7 @@ namespace MarsFramework
 
                 // Click Add
                 LanguageAddBtn.Click();
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter language successfully");
 
             } catch(Exception ex)
             {
@@ -344,6 +357,7 @@ namespace MarsFramework
 
                 // Click Add
                 SkillAddBtn.Click();
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter skills successfully");
 
             } catch (Exception ex)
             {
@@ -383,6 +397,7 @@ namespace MarsFramework
 
                 // Click Add
                 EducationAddBtn.Click();
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter education successfully");
 
             } catch (Exception ex)
             {
@@ -414,6 +429,7 @@ namespace MarsFramework
 
                 // Click Add
                 CertificationAddBtn.Click();
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Enter certificate successfully");
 
             } catch (Exception ex)
             {
@@ -435,9 +451,7 @@ namespace MarsFramework
                 GlobalDefinitions.driver.Navigate().Refresh();
 
                 // Wait for all text present in Element
-                IWebElement element = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']" +
-                    "/div/section[2]//div[2]//div[2]/div/div/div[1]"));
-                GlobalDefinitions.WaitForTextPresentInElement(GlobalDefinitions.driver, element,
+                GlobalDefinitions.WaitForTextPresentInElement(GlobalDefinitions.driver, profileName,
                     GlobalDefinitions.ExcelLib.ReadData(2, "Name"), 10);
 
             } catch (Exception e)
@@ -607,6 +621,9 @@ namespace MarsFramework
 
         }
 
+
+
+        // Delete Profile
         internal void DeleteProfile()
         {
             try
@@ -615,9 +632,7 @@ namespace MarsFramework
                 GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile"); 
 
                 // Wait for all text present in Element
-                IWebElement element = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']" +
-                    "/div/section[2]//div[2]//div[2]/div/div/div[1]"));
-                GlobalDefinitions.WaitForTextPresentInElement(GlobalDefinitions.driver, element,
+                GlobalDefinitions.WaitForTextPresentInElement(GlobalDefinitions.driver, profileName,
                     GlobalDefinitions.ExcelLib.ReadData(2, "Name"), 10);
 
             } catch (Exception e)
@@ -631,8 +646,9 @@ namespace MarsFramework
                 //Delete the last record
                 LanguageTab.Click();
                 LanguageDeleteBtn.Click();
-
-            }catch(NoSuchElementException e)
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Delete language successfully");
+            }
+            catch(NoSuchElementException e)
             {
                 Assert.Fail("No records in list to delete, please add language first!", e.Message);
             }
@@ -648,7 +664,7 @@ namespace MarsFramework
                 //Delete last record
                 SkillTab.Click();
                 SkillDeleteBtn.Click();
-
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Delete skill successfully");
             }
             catch (NoSuchElementException e)
             {
@@ -666,7 +682,7 @@ namespace MarsFramework
                 //Delete last record
                 EducationTab.Click();
                 EducationDeleteBtn.Click();
-
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Delete education successfully");
             }
             catch (NoSuchElementException e)
             {
@@ -684,7 +700,7 @@ namespace MarsFramework
                 //Delete last record
                 CertificationTab.Click();
                 CertificateDeleteBtn.Click();
-
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Delete certification successfully");
             }
             catch (NoSuchElementException e)
             {
@@ -697,23 +713,28 @@ namespace MarsFramework
             #endregion
         }
 
+        // Verify Delete-Profile
         internal void VerifyDeleteProfile()
         {
-            // Populate data saved in Excel
-            GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile");
+            try
+            {
+                // Populate data saved in Excel
+                GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "Profile");
 
-            // Refresh the page
-            GlobalDefinitions.driver.Navigate().Refresh();
+                // Refresh the page
+                GlobalDefinitions.driver.Navigate().Refresh();
 
-            // Wait for all text present in Element
-            IWebElement element = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']" +
-                "/div/section[2]//div[2]//div[2]/div/div/div[1]"));
-            GlobalDefinitions.WaitForTextPresentInElement(GlobalDefinitions.driver, element,
-                GlobalDefinitions.ExcelLib.ReadData(2, "Name"), 10);
+                // Wait for all text present in Element
+                GlobalDefinitions.WaitForTextPresentInElement(GlobalDefinitions.driver, profileName,
+                    GlobalDefinitions.ExcelLib.ReadData(2, "Name"), 10);
 
+            } catch (Exception ex)
+            {
+                Assert.Fail("Test failed to verify deleting profile at preparation steps", ex.Message);
+            }
 
             #region Verify Delete Language
-            
+
             try
             {
                 // Jump to Language tab
@@ -768,13 +789,73 @@ namespace MarsFramework
             #endregion
 
             #region Verify Delete Education
+            // Jump to Education tab
             EducationTab.Click();
+
+            // Read Education info saved in excel
+            var instituteNameExcel = GlobalDefinitions.ExcelLib.ReadData(2, "University");
+            var instituteCountryExcel = GlobalDefinitions.ExcelLib.ReadData(2, "Country");
+            var instituteTitleExcel = GlobalDefinitions.ExcelLib.ReadData(2, "Title");
+            var instituteDegreeExcel = GlobalDefinitions.ExcelLib.ReadData(2, "Degree");
+            var instituteGraduateYearExcel = GlobalDefinitions.ExcelLib.ReadData(2, "Graduation Year");
+
+            try
+            {
+                // Find the last row data
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='third']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + instituteNameExcel + "')]"));
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='third']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + instituteCountryExcel + "')]"));
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='third']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + instituteTitleExcel + "')]"));
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='third']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + instituteDegreeExcel + "')]"));
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='third']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + instituteGraduateYearExcel + "')]"));
+
+                Assert.Fail("Failed to delete education.");
+
+            } catch (NoSuchElementException)
+            {
+
+            } catch (Exception ex)
+            {
+                Assert.Fail("Test failed to verify deleting education", ex.Message);
+            }
 
             #endregion
 
             #region Verify Delete Certificate
+
+            // Jump to Certification tab
             CertificationTab.Click();
 
+            // Read Education info saved in excel
+            var certificateNameExcel = GlobalDefinitions.ExcelLib.ReadData(2, "Certificate");
+            var certificateFromExcel = GlobalDefinitions.ExcelLib.ReadData(2, "CertifiedFrom");
+            var certificateYearExcel = GlobalDefinitions.ExcelLib.ReadData(2, "Certificate Issuing Year");     
+
+            try
+            {
+                // Find the last row data
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='fourth']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + certificateNameExcel + "')]"));
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='fourth']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + certificateFromExcel + "')]"));
+                GlobalDefinitions.driver.FindElement(By.XPath("//div[@data-tab='fourth']" +
+                            "//table/tbody[last()]/tr//*[contains(text(), '" + certificateYearExcel + "')]"));
+
+                Assert.Fail("Failed to delete certificate.");
+
+            }
+            catch (NoSuchElementException)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Test failed to verify deleting certificate", ex.Message);
+            }
             #endregion
 
 

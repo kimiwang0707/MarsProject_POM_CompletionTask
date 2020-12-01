@@ -70,7 +70,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\ExcelData\TestData.xlsx.
+        ///   Looks up a localized string similar to ..\..\Files\TestData.xlsx.
         /// </summary>
         internal static string ExcelPath {
             get {
@@ -88,7 +88,16 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\TestReports\MarsReports.html.
+        ///   Looks up a localized string similar to ..\..\Files\TestDataManageListings.xlsx.
+        /// </summary>
+        internal static string ManageListingPath {
+            get {
+                return ResourceManager.GetString("ManageListingPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..\..\TestReports\MarsReports.html.
         /// </summary>
         internal static string ReportPath {
             get {
@@ -97,7 +106,7 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\Config\XMLFile.xml.
+        ///   Looks up a localized string similar to ..\..\Config\XMLFile.xml.
         /// </summary>
         internal static string ReportXMLPath {
             get {
@@ -106,11 +115,29 @@ namespace MarsFramework.Config {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\TestReports\Screenshots\Kimi\.
+        ///   Looks up a localized string similar to ..\..\Files\SampleTest.txt.
+        /// </summary>
+        internal static string SampleWorkPath {
+            get {
+                return ResourceManager.GetString("SampleWorkPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..\..\TestReports\Screenshots\Kimi\.
         /// </summary>
         internal static string ScreenShotPath {
             get {
                 return ResourceManager.GetString("ScreenShotPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..\..\Files\TestDataShareSkill.xlsx.
+        /// </summary>
+        internal static string ShareSkillPath {
+            get {
+                return ResourceManager.GetString("ShareSkillPath", resourceCulture);
             }
         }
     }

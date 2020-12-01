@@ -149,9 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="ExcelData\TestData.xlsx" />
-    <None Include="ExcelData\TestDataManageListings.xlsx" />
-    <None Include="ExcelData\TestDataShareSkill.xlsx" />
+    <None Include="Files\TestData.xlsx" />
+    <None Include="Files\TestDataManageListings.xlsx" />
+    <None Include="Files\TestDataShareSkill.xlsx" />
     <None Include="packages.config" />
     <None Include="TestReports\ExtentReports 2.0_files\css" />
   </ItemGroup>
@@ -164,6 +164,7 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <Content Include="Files\SampleTest.txt" />
     <Content Include="TestReports\ExtentReports 2.0_files\1.png" />
     <Content Include="TestReports\ExtentReports 2.0_files\2.png" />
     <Content Include="TestReports\ExtentReports 2.0_files\extent.css" />

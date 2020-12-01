@@ -122,19 +122,28 @@
     <comment>1 for firefox and 2 for Chrome</comment>
   </data>
   <data name="ExcelPath" xml:space="preserve">
-    <value>C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\ExcelData\TestData.xlsx</value>
+    <value>..\..\Files\TestData.xlsx</value>
   </data>
   <data name="IsLogin" xml:space="preserve">
     <value>true</value>
     <comment>If true Login, else Register</comment>
   </data>
+  <data name="ManageListingPath" xml:space="preserve">
+    <value>..\..\Files\TestDataManageListings.xlsx</value>
+  </data>
   <data name="ReportPath" xml:space="preserve">
-    <value>C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\TestReports\MarsReports.html</value>
+    <value>..\..\TestReports\MarsReports.html</value>
   </data>
   <data name="ReportXMLPath" xml:space="preserve">
-    <value>C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\Config\XMLFile.xml</value>
+    <value>..\..\Config\XMLFile.xml</value>
+  </data>
+  <data name="SampleWorkPath" xml:space="preserve">
+    <value>..\..\Files\SampleTest.txt</value>
   </data>
   <data name="ScreenShotPath" xml:space="preserve">
-    <value>C:\Users\HUAWEI\Desktop\IC Test Assignment\Completion Task\marsframework\marsframework-master\MarsFramework\TestReports\Screenshots\Kimi\</value>
+    <value>..\..\TestReports\Screenshots\Kimi\</value>
+  </data>
+  <data name="ShareSkillPath" xml:space="preserve">
+    <value>..\..\Files\TestDataShareSkill.xlsx</value>
   </data>
 </root>

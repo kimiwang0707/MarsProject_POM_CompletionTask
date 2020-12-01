@@ -118,6 +118,7 @@ namespace MarsFramework.Global
                         //Add all the details for each row
                         dataCol.Add(dtTable);
 
+                        
                     }
                 }
 
@@ -175,6 +176,10 @@ namespace MarsFramework.Global
             {
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Name(value)));
             }
+            if (key == "LinkText")
+            {
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.LinkText(value)));
+            }
 
         }
 
@@ -200,6 +205,10 @@ namespace MarsFramework.Global
             if (key == "Name")
             {
                 wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Name(value)));
+            }
+            if (key == "LinkText")
+            {
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.LinkText(value)));
             }
 
         }

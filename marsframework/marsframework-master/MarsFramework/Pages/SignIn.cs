@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using System;
 using SeleniumExtras.PageObjects;
 using System.Threading;
+using System.Diagnostics;
 //using OpenQA.Selenium.Support.PageObjects;
 //using PageFactory = SeleniumExtras.PageObjects.PageFactory;
 
@@ -40,6 +41,9 @@ namespace MarsFramework.Pages
 
         internal void LoginSteps()
         {
+            // extent reports
+            Base.test = Base.extent.StartTest("Login steps test");
+
             //Populate excel data
             GlobalDefinitions.ExcelLib.PopulateInCollection(Base.ExcelPath, "SignIn");
 
@@ -58,11 +62,22 @@ namespace MarsFramework.Pages
             // Click Login button
             LoginBtn.Click();
 
-            // Verify the login status
-            GlobalDefinitions.WaitForElement(GlobalDefinitions.driver, "XPath", "//*[contains(text(),'Kimi')]", 10);
+            // Verify the login status                      
+            GlobalDefinitions.WaitForElementClickable(GlobalDefinitions.driver, "XPath", "//*[@id='account-profile-section']" +
+                "//div[1]/div[2]/div/span", 10);         
 
-            var loginName = GlobalDefinitions.driver.FindElement(By.XPath("//*[contains(text(), 'Kimi')]")).Text;
-            Assert.That(loginName, Contains.Substring("Kimi"));
+            var greeting = GlobalDefinitions.driver.FindElement(By.XPath("//*[@id='account-profile-section']//div[1]/div[2]/div/span")).Text;
+            //Assert.That(loginName, Contains.Substring("Kimi"));
+            if (greeting.Contains("Hi"))
+            {
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Pass, "Login Successful");
+            }
+            else
+            {
+                Base.test.Log(RelevantCodes.ExtentReports.LogStatus.Fail, "Login failed");
+            }
+
+
         }
     }
 }
